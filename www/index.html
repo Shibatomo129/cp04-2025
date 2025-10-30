@@ -38,6 +38,9 @@
         $('#btnC').click(function(e) {
             btnCClick(e);
         });
+        $('#btnD').click(function(e) {
+            btnDClick(e);
+        });
         init();
     });
     
@@ -151,6 +154,7 @@
 
     // 変数宣言
     var active = false;
+    var active2 = false;
     var startTime = 0;
     var period = 0;
     var rest = 0;
@@ -161,6 +165,7 @@
         $('#btnA').prop('disabled', false);
         $('#btnB').prop('disabled', false);
         $('#btnC').prop('disabled', false);
+        $('#btnD').prop('disabled', false);
         
     }
 
@@ -187,6 +192,7 @@
     // ButtonBがクリックされた時の処理
     function btnBClick(e){
         active = false;
+        active2 = false;
     }
 
     // ButtonCがクリックされた時の処理
@@ -196,6 +202,14 @@
         period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val());
         $("#time").html("経過時間：0");
         $("#remain").html("残り時間：" + period);   
+    }
+
+    function btnDClick(e){
+       period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val());
+        $("#time").html("経過時間：0");
+        $("#remain").html("残り時間：" + period); 
+        active2 = true;
+         startTime = new Date();
     }
  
     // 繰り返し実行する処理
@@ -208,6 +222,17 @@
          analog(rest); 
          if(rest <= 0){
              active = false;
+             alarm();
+         }
+     }  
+     if(active2){
+         etime = parseInt( (new Date() - startTime)/1000);
+         rest = period * 2 -etime;
+         $("#time").html("経過時間： " + etime);
+         $("#remain").html("残り時間： " + rest);
+         analog(rest); 
+         if(rest <= 0){
+             active2 = false;
              alarm();
          }
      }  
@@ -225,7 +250,8 @@
     <div id="time">Time</div>
     <button id="btnA">Start</button>  
     <button id="btnB">Stop</button>  
-    <button id="btnC">Set</button>  
+    <button id="btnC">Set</button>
+    <button id="btnD">Start*2</button>  
     <input type="number" id="minute" value=0 >
     <input type="number" id="second" value=15 >
 </body>
