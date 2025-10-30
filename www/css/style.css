@@ -72,7 +72,12 @@
     #btnD {
         background-color:pink;
         font-size: 20px;
-        position:absolute; top:500px; left:2%; width:43%; height:60px; 
+        position:absolute; top:500px; left:2%; width:35%; height:60px; 
+    }
+    #btnE {
+        background-color:greenyellow;
+        font-size: 20px;
+        position:absolute; top:500px; left:37%; width:30%; height:60px; 
     }
     
     #minute {
